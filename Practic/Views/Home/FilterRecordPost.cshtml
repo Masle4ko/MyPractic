@@ -1,0 +1,18 @@
+﻿@model  IEnumerable<MyBlog.SearchEngine.RecordFilter>
+@using MyBlog.Core;
+@using MyBlog.SearchEngine;
+
+@foreach (var items in (IEnumerable<RecordFilter>)ViewData["SHOT"])
+{
+        <tr>
+            <td>
+                @Html.Raw(Html.ActionLink(items.Title, "GetRecord", "Record", new { id = items.Id }, null))
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => items.CategoryID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => items.StartDate)
+            </td>
+        </tr>
+    }

@@ -1,0 +1,78 @@
+﻿@model MyBlog.SearchEngine.RecordFilter
+@using MyBlog.Core;
+@using MyBlog.SearchEngine;
+
+
+
+
+@{ var options = new AjaxOptions()
+    {
+        UpdateTargetId = "tabledata",
+        Url = Url.Action("FilterRecordPost")
+    };
+}
+<h2>Фильтры поиска</h2>
+
+
+        @using (Ajax.BeginForm(options))
+        {
+            <p>
+                Заголовок статьи:
+
+                @Html.TextBox("Title")
+
+            </p>
+            @*<p>
+                Теги статьи:
+
+                @Html.TextBox("PreviewText")
+
+            </p>*@
+
+
+            <p>
+                Выберите категорию:
+                @Html.DropDownList("Id_Category", (IEnumerable<SelectListItem>)ViewData["ListCategory"])
+            </p>
+
+            <p>
+                Добавить время начала ( в формате: гггг-мм-дд чч:мм):
+                @Html.TextBox("StartDate")
+            </p>
+            <p>
+                Введите минимальное значение для цены:
+                @Html.TextBox("min")
+            </p>
+            <p>
+                Введите максимальное значение для цены:
+                @Html.TextBox("max")
+            </p>
+            <p>
+                Примечание: если хотите отфильтровать события по стоимости, то необходимо указывать обе границы ценового диапазона!
+            </p>
+
+    <table cellpadding="3">
+        <thead>
+         <tr>
+            <th>Название статьи</th>
+            <th>Категория</th>
+            <th>Время начала</th>
+         </tr>
+        </thead>
+        <tbody id="tabledata">
+            @Html.Action("FilterRecordPost", new { title = Model, PreviewText = Model, StartDate = Model, Id_Category = Model, min = Model, max = Model})
+        </tbody>
+
+
+    </table>
+
+    <p>
+        <input type="submit" value="Поиск" />
+    </p>
+        }
+
+
+@section scripts
+    {
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    }

@@ -1,0 +1,18 @@
+﻿@{
+    ViewBag.Title = "НеСидиДома:Календарь событий";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    if (HttpContext.Current.User.IsInRole("Admin"))
+    {
+        Layout = "~/Views/Shared/_adminlayout.cshtml";
+    }
+
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+}
+
+<h2>Календарь событий</h2>
+<div class="scheduler_container">
+    @Html.Raw(Model.Render())
+</div>

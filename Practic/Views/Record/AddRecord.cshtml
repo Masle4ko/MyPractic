@@ -1,0 +1,94 @@
+﻿@{
+    //ViewBag.Title = "AddRecord";
+    if (HttpContext.Current.User.IsInRole("Admin"))
+    {
+        Layout = "~/Views/Shared/_adminlayout.cshtml";
+    }
+
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    this.Page.ValidateRequestMode = "false";
+}
+
+@using MyBlog.Models;
+<script src="~/Scripts/ckeditor/ckeditor.js"></script>
+<script src="~/Scripts/ckeditor/adapters/jquery.js"></script>
+<script type="text/javascript">
+    function CKupdate() {
+        for (instance in CKEDITOR.instances)
+            CKEDITOR.instances[instance].updateElement();
+        alert("ok1");
+    }
+
+
+
+</script>
+
+<script type="text/javascript">
+    window.onload = function () {
+
+        CKEDITOR.replace('material', {
+            filebrowserBrowseUrl: '/Scripts/Filemanager-master/index.html?type="Images"'
+        });
+        CKEDITOR.replace('material2', {
+            filebrowserBrowseUrl: '/Scripts/Filemanager-master/index.html?type="Images"'
+        });
+    };
+
+</script>
+
+@using (Html.BeginForm())
+{
+    <p>
+        Заголовок статьи:
+
+        @Html.TextBox("Title")
+
+    </p>
+    <p>
+        Добавить анонс статьи:
+    </p>
+    @Html.TextBox("PreviewText")
+
+
+    <p>
+        Выберите категорию:
+     @Html.DropDownList("Id_Category", (IEnumerable<SelectListItem>)ViewData["ListCategory"])
+    </p>
+   
+    <div class="material-text">
+        <textarea name="textar" id="material">
+  
+</textarea>
+
+    </div>
+
+    <p>
+        Добавить время начала ( в формате: гггг-мм-дд чч:мм):
+    </p>
+    @Html.TextBox("StartDate")
+    <p>
+        Добавить время окончания ( в формате: гггг-мм-дд чч:мм):
+    </p>
+    @Html.TextBox("EndDate")
+    <p>
+        Цена:
+    </p>
+    @Html.TextBox("Price")
+    <p>
+        Место проведения:
+    </p>
+    @Html.TextBox("Location")
+
+    <p>
+        <input type="submit" value="Добавить" onclick="CKupdate();" />
+    </p>
+    
+    
+    
+    
+    
+    
+}

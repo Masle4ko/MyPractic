@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = "НеСидиДома";
+    if (HttpContext.Current.User.IsInRole("Admin"))
+    {
+        Layout = "~/Views/Shared/_adminlayout.cshtml";
+    }
+
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+}
+
+
+<h1 style="top:0;">
+    Здравствуйте!
+
+</h1>
+
